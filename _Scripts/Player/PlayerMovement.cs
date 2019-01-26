@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerHealth))]
 public class PlayerMovement : MonoBehaviour {
+    public Animator animator;
     public float turnSpeed = 50f;
     public float walkSpeed = 6.0f;
     public float runSpeed = 13.0f;
@@ -37,6 +38,7 @@ public class PlayerMovement : MonoBehaviour {
         if ( Input.GetKeyDown(KeyCode.Space) && !jumping ) {
             jumping = true;
             verticalSpeed = jumpSpeed;
+            animator.SetTrigger("Jump");
         }
         if ( Input.GetKeyDown(KeyCode.LeftShift) ) {
             running = true;
@@ -48,8 +50,19 @@ public class PlayerMovement : MonoBehaviour {
         // Running
         if ( running && health.FitnessAvailable() ) {
             speed = runSpeed;
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", true);
+            animator.SetBool("Idle", false);
+        }
+        else if ( h == 0.0f && v == 0.0f ) {
+            animator.SetBool("Walk", false);
+            animator.SetBool("Run", false);
+            animator.SetBool("Idle", true);
         }
         else {
+            animator.SetBool("Walk", true);
+            animator.SetBool("Run", false);
+            animator.SetBool("Idle", false);
             speed = walkSpeed;
             health.IncreaseFitness();
         }
