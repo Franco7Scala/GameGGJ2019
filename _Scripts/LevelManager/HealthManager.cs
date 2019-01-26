@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TimerManager : MonoBehaviour
+public class HealthManager : MonoBehaviour
 {
     public Image healthBar;
+    public Image fitnessBar;
     public float healthDamage = 0.1f;
 
     private void decreaseBar(float damage)
@@ -22,5 +23,9 @@ public class TimerManager : MonoBehaviour
 
         healthBar.fillAmount -= (healthDamage * Time.deltaTime);
         healthBar.color = Color.Lerp(Color.red, Color.green, healthBar.fillAmount);
+
+        fitnessBar.fillAmount = Support.sharedObjects.player.GetComponent<PlayerHealth>().fitness / 100f;
+
+        Support.sharedObjects.player.GetComponent<PlayerHealth>().health = healthBar.fillAmount * 100;
     }
 }
