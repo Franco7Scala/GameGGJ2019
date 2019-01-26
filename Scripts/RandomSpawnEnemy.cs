@@ -12,17 +12,16 @@ public class RandomSpawnEnemy : MonoBehaviour
     {
         for(int i=0; i<number; i++)
         {
-            int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Count));
+            //da aggiungere controllo su point usati
+                int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Count));
+                if (spawnUsed[randomIndex])
+                {
+
+                }
         }
-        /*
 
-
-        GameObject point = spawnPoints[randomIndex];
-
-        Player.transform.position = point.transform.position;
-        */
 
         Instantiate(enemy, spawnPoints[0].transform.position, Quaternion.identity);
-        enemy.active = true;
+        enemy.SetActive(true);
     }
 }
