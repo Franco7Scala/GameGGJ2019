@@ -8,13 +8,28 @@ public class LevelManager : MonoBehaviour
 
     private GameObject[] spawnPoints;
     private SpawnManager spawnManager;
+    private MainLightManager lightManager;
+    private List<string> words;
 
-    // Start is called before the first frame update
     void Start()
     {
+        words = new List<string>();
+        words.Add("test");
+        words.Add("test2");
+        words.Add("test3");
+        words.Add("test4");
+        words.Add("test5");
+
+        int level = PlayerPrefs.HasKey("level") ? PlayerPrefs.GetInt("level") : 1;
+
+        lightManager = manager.GetComponent<MainLightManager>();
+        lightManager.IntensityUp(((float)level) / ((float)words.Count));
+
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPointsPlayer");
 
         spawnManager = manager.GetComponent<SpawnManager>();
-        spawnManager.InitScene(spawnPoints, "test");
+        spawnManager.InitScene(spawnPoints, words[level-1]);
     }
+
+
 }
