@@ -5,14 +5,14 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject playerManager;
-    public GameObject emeryManager;
+    //public GameObject emeryManager;
 
     void Start()
     {
         RandomSpawnPlayer randomSpawnPlayer = playerManager.GetComponent<RandomSpawnPlayer>();
-        RandomSpawnEnemy randomSpawnEmery = emeryManager.GetComponent<RandomSpawnEnemy>();
+        //RandomSpawnEnemy randomSpawnEmery = emeryManager.GetComponent<RandomSpawnEnemy>();
 
         randomSpawnPlayer.StartPlayer();
-        randomSpawnEmery.StartEmery(1);
+        //randomSpawnEmery.StartEmery(1);
     }
 }

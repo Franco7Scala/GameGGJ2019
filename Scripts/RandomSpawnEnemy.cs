@@ -4,19 +4,25 @@ using UnityEngine;
 
 public class RandomSpawnEnemy : MonoBehaviour
 {
+    public GameObject enemy;
     public List<GameObject> spawnPoints;
+    public List<bool> spawnUsed;
 
     public void StartEmery(int number)
     {
+        for(int i=0; i<number; i++)
+        {
+            int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Count));
+        }
         /*
-        int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Count));
+
 
         GameObject point = spawnPoints[randomIndex];
 
         Player.transform.position = point.transform.position;
         */
 
-        GameObject go = (GameObject)Instantiate(Resources.Load("Cylinder"));
-        int a = 0;
+        Instantiate(enemy, spawnPoints[0].transform.position, Quaternion.identity);
+        enemy.active = true;
     }
 }
