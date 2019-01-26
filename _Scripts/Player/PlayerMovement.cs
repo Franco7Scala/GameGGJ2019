@@ -9,6 +9,8 @@ using UnityEngine;
 //[RequireComponent(typeof(PlayerAnimator))]
 public class PlayerMovement : MonoBehaviour
 {
+    public float turnSpeed = 50f;
+
     //public VirtualPad pad;
     public float walkSpeed = 6.0f;
     public float runSpeed = 13.0f;
