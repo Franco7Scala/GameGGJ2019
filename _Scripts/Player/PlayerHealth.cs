@@ -4,18 +4,16 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    private float health = 100f;
-
-    public float Health { get => health; set => health = value; }
-
+    public float health = 100f;
+    
     public void EnemyAttack(float quantity)
     {
-        if(Health <= 0)
+        if( health <= 0)
         {
             return;
         }
 
-        Health -= quantity;
+        health -= quantity;
     }
 
 
