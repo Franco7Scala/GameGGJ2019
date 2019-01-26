@@ -1,74 +1,68 @@
 fileFormatVersion: 2
-guid: 877da301d20c12e4c9ee4169220fe7c3
+guid: 206453f885f948241b4c9c178aec812d
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Armature
-    100002: Camera
-    100004: Head
-    100006: Head_end
-    100008: Head_end_end
-    100010: Hips
-    100012: //RootNode
-    100014: Lamp
-    100016: LeftFoot
-    100018: LeftFoot_end
-    100020: LeftFoot_end_end
-    100022: LeftHand
-    100024: LeftHand_end
-    100026: LeftHand_end_end
-    100028: LeftLowerArm
-    100030: LeftLowerLeg
-    100032: LeftUpperArm
-    100034: LeftUpperLeg
-    100036: Mesh_Kaduki
-    100038: RightFoot
-    100040: RightFoot_end
-    100042: RightFoot_end_end
-    100044: RightHand
-    100046: RightHand_end
-    100048: RightHand_end_end
-    100050: RightLowerArm
-    100052: RightLowerLeg
-    100054: RightUpperArm
-    100056: RightUpperLeg
-    100058: Spine
+    100002: Head
+    100004: Head_end
+    100006: Head_end_end
+    100008: Hips
+    100010: //RootNode
+    100012: LeftFoot
+    100014: LeftFoot_end
+    100016: LeftFoot_end_end
+    100018: LeftHand
+    100020: LeftHand_end
+    100022: LeftHand_end_end
+    100024: LeftLowerArm
+    100026: LeftLowerLeg
+    100028: LeftUpperArm
+    100030: LeftUpperLeg
+    100032: Mesh_KadukiSailorSuitBlackHair
+    100034: RightFoot
+    100036: RightFoot_end
+    100038: RightFoot_end_end
+    100040: RightHand
+    100042: RightHand_end
+    100044: RightHand_end_end
+    100046: RightLowerArm
+    100048: RightLowerLeg
+    100050: RightUpperArm
+    100052: RightUpperLeg
+    100054: Spine
     400000: Armature
-    400002: Camera
-    400004: Head
-    400006: Head_end
-    400008: Head_end_end
-    400010: Hips
-    400012: //RootNode
-    400014: Lamp
-    400016: LeftFoot
-    400018: LeftFoot_end
-    400020: LeftFoot_end_end
-    400022: LeftHand
-    400024: LeftHand_end
-    400026: LeftHand_end_end
-    400028: LeftLowerArm
-    400030: LeftLowerLeg
-    400032: LeftUpperArm
-    400034: LeftUpperLeg
-    400036: Mesh_Kaduki
-    400038: RightFoot
-    400040: RightFoot_end
-    400042: RightFoot_end_end
-    400044: RightHand
-    400046: RightHand_end
-    400048: RightHand_end_end
-    400050: RightLowerArm
-    400052: RightLowerLeg
-    400054: RightUpperArm
-    400056: RightUpperLeg
-    400058: Spine
-    2000000: Camera
-    2100000: Standard
-    4300000: Mesh_Kaduki
+    400002: Head
+    400004: Head_end
+    400006: Head_end_end
+    400008: Hips
+    400010: //RootNode
+    400012: LeftFoot
+    400014: LeftFoot_end
+    400016: LeftFoot_end_end
+    400018: LeftHand
+    400020: LeftHand_end
+    400022: LeftHand_end_end
+    400024: LeftLowerArm
+    400026: LeftLowerLeg
+    400028: LeftUpperArm
+    400030: LeftUpperLeg
+    400032: Mesh_KadukiSailorSuitBlackHair
+    400034: RightFoot
+    400036: RightFoot_end
+    400038: RightFoot_end_end
+    400040: RightHand
+    400042: RightHand_end
+    400044: RightHand_end_end
+    400046: RightLowerArm
+    400048: RightLowerLeg
+    400050: RightUpperArm
+    400052: RightUpperLeg
+    400054: Spine
+    2100000: Standard.003
+    4300000: Mesh_KadukiSailorSuitBlackHair
     9500000: //RootNode
-    10800000: Lamp
-    13700000: Mesh_Kaduki
+    13700000: Mesh_KadukiSailorSuitBlackHair
   externalObjects: {}
   materials:
     importMaterials: 1
