@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class RandomSpawnPlayer : MonoBehaviour
 {
-    public List<GameObject> spawnPoints;
     public GameObject Player;
 
-    public void StartPlayer()
+    public int StartPlayer(GameObject[] spawnPoints)
     {
-        int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Count));
+        int randomIndex = Mathf.RoundToInt(Random.Range(0, spawnPoints.Length));
 
-        GameObject point = spawnPoints[randomIndex];
+        Player.transform.position = spawnPoints[randomIndex].transform.position;
 
-        Player.transform.position = point.transform.position;
+        return randomIndex;
     }
 }

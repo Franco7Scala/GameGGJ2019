@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject playerManager;
-    //public GameObject emeryManager;
+    public GameObject objectSpawn;
+    public GameObject objectInventary;
 
-    void Start()
+    public void InitScene(GameObject[] spawnPoints, string word)
     {
-        RandomSpawnPlayer randomSpawnPlayer = playerManager.GetComponent<RandomSpawnPlayer>();
-        //RandomSpawnEnemy randomSpawnEmery = emeryManager.GetComponent<RandomSpawnEnemy>();
+        RandomSpawnPlayer randomSpawnPlayer = objectSpawn.GetComponent<RandomSpawnPlayer>();
 
-        randomSpawnPlayer.StartPlayer();
-        //randomSpawnEmery.StartEmery(1);
+        int indexPointPlayer = randomSpawnPlayer.StartPlayer(spawnPoints);
+
+        GameObject[] otherSpawnPoints = new GameObject[spawnPoints.Length];
+        for(int i=0; i<indexPointPlayer; i++)
+        {
+            otherSpawnPoints[i] = spawnPoints[i];
+        }
+
+        for (int i = indexPointPlayer + 1; i < spawnPoints.Length; i++)
+        {
+            otherSpawnPoints[i-1] = spawnPoints[i];
+        }
+
+
+        InventaryManager inventaryManager = objectInventary.GetComponent<InventaryManager>();
+        inventaryManager.Init(word, otherSpawnPoints, spawnPoints[indexPointPlayer].transform.position);
+
+        //TODO spawn word
     }
 }
