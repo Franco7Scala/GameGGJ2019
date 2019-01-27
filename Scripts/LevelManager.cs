@@ -99,6 +99,8 @@ public class LevelManager : MonoBehaviour
             pos.x -= 4;
             house.transform.position = pos;
             Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
+
+            PlayerPrefs.DeleteAll();
         }
     }
 
