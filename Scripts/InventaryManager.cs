@@ -12,10 +12,13 @@ public class InventaryManager : MonoBehaviour
     private GameObject[] listLetterObject;
     private List<Letter> listLetterCollected;
 
+    private LevelManager levelManager;
+
     public GameObject[] alphabet;
 
     public GameObject gridLayout;
     public GameObject letterUi;
+    public GameObject levelObject;
 
     private int indexLetter = 0;
 
@@ -33,6 +36,7 @@ public class InventaryManager : MonoBehaviour
 
     public void Init(string word, GameObject[] spawnPoints, Vector3 playerPosition)
     {
+        levelManager = levelObject.GetComponent<LevelManager>();
         listLetterCollected = new List<Letter>();
 
         letters = word.ToUpper().ToCharArray();
@@ -123,7 +127,14 @@ public class InventaryManager : MonoBehaviour
 
                 textareas[i].color = new Color(0.9716981f, 0.6558038f, 0.1420879f, 1f);
 
-                return checkWin();
+                bool win = checkWin();
+
+                if (win)
+                {
+                    levelManager.Win();
+                }
+
+                return win;
             }
         }
         return false;

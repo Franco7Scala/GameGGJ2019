@@ -31,5 +31,9 @@ public class LevelManager : MonoBehaviour
         spawnManager.InitScene(spawnPoints, words[level-1]);
     }
 
-
+    public void Win()
+    {
+        int level = PlayerPrefs.HasKey("level") ? PlayerPrefs.GetInt("level") : 1;
+        PlayerPrefs.SetInt("level", level + 1);
+    }
 }
