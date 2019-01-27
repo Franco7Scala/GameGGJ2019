@@ -12,7 +12,10 @@ public class HealthManager : MonoBehaviour
 
     public void IncreaseHealthLetterCollected()
     {
-        healthBar.fillAmount += healthRegenerationStep;
+        if (healthBar.fillAmount + healthRegenerationStep < 1)
+            healthBar.fillAmount += healthRegenerationStep;
+        else
+            healthBar.fillAmount = 1;
         Support.sharedObjects.player.GetComponent<PlayerHealth>().health = healthBar.fillAmount * 100;
     }
 
