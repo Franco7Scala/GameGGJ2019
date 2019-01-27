@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
     public GameObject manager;
+    public GameObject house;
 
     private GameObject[] spawnPoints;
     private SpawnManager spawnManager;
@@ -36,13 +38,29 @@ public class LevelManager : MonoBehaviour
         int level = PlayerPrefs.GetInt("level", 1);
         PlayerPrefs.SetInt("level", level + 1);
 
-        Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterWin);
 
 
+        if (level != words.Count)
+        {
+            Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterWin);
+        }
+        else
+        {
+            house.SetActive(true);
+            Vector3 pos = Support.sharedObjects.player.transform.position;
+            pos.y += 7;
+            house.transform.position = pos;
+            Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
+        }
     }
 
     public void AfterWin ()
     {
         GetComponent<GameController>().ReloadScene();
+    }
+
+    public void AfterEnd()
+    {
+        SceneManager.LoadScene("MenuScene");
     }
 }
