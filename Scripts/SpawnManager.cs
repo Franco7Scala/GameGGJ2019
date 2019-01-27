@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    public GameObject objectSpawn;
     public GameObject objectInventary;
 
     public void InitScene(GameObject[] spawnPoints, string word)
     {
-        RandomSpawnPlayer randomSpawnPlayer = objectSpawn.GetComponent<RandomSpawnPlayer>();
+        RandomSpawnPlayer randomSpawnPlayer = GetComponent<RandomSpawnPlayer>();
 
         int indexPointPlayer = randomSpawnPlayer.StartPlayer(spawnPoints);
 

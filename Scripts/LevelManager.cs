@@ -20,7 +20,7 @@ public class LevelManager : MonoBehaviour
         words.Add("test4");
         words.Add("test5");
 
-        int level = PlayerPrefs.HasKey("level") ? PlayerPrefs.GetInt("level") : 1;
+        int level = PlayerPrefs.GetInt("level", 1);
 
         lightManager = manager.GetComponent<MainLightManager>();
         lightManager.IntensityUp(((float)level) / ((float)words.Count));
@@ -33,9 +33,16 @@ public class LevelManager : MonoBehaviour
 
     public void Win()
     {
-        int level = PlayerPrefs.HasKey("level") ? PlayerPrefs.GetInt("level") : 1;
+        int level = PlayerPrefs.GetInt("level", 1);
         PlayerPrefs.SetInt("level", level + 1);
 
+        Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterWin);
 
+
+    }
+
+    public void AfterWin ()
+    {
+        GetComponent<GameController>().ReloadScene();
     }
 }

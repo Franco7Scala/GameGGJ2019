@@ -146,8 +146,14 @@ public class InventaryManager : MonoBehaviour
         {
             found[i] = false;
             textareas[i].color = new Color(0.8773585f, 0.864943f, 0.864943f, 1f);
-            listLetterCollected.Clear();
         }
+
+        foreach(Letter l in listLetterCollected)
+        {
+            l.Return();
+        }
+
+        listLetterCollected.Clear();
     }
 
     public bool checkWin()

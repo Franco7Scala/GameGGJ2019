@@ -37,7 +37,8 @@ public class Letter : MonoBehaviour {
         }
         else
         {
-            transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
+            transform.GetChild(1).transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
+            Debug.Log("");
         }
     }
 
@@ -48,6 +49,8 @@ public class Letter : MonoBehaviour {
                 if (agent.name.Contains("(Clone)"))
                 {
                     bool win = inventaryManager.AddLetter(agent.name[0], this);
+                    transform.GetChild(0).GetComponent<ParticleSystem>().Stop();
+
                     Debug.Log(win);
                 }
                 Debug.Log(other.gameObject.name);
@@ -81,7 +84,7 @@ public class Letter : MonoBehaviour {
 
         agent.destination = destination;
         agent.transform.Rotate(new Vector3(90, 0, 0), Space.Self);
-        transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
+        transform.GetChild(1).transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
     }
 
     public void Return() {
@@ -90,6 +93,7 @@ public class Letter : MonoBehaviour {
         agent.enabled = true;
         agent.destination = startPosition;
         agent.transform.Rotate(new Vector3(90, 0, 0), Space.Self);
+        transform.GetChild(0).GetComponent<ParticleSystem>().Play();
     }
 
 
