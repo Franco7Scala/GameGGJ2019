@@ -6,6 +6,9 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class Letter : MonoBehaviour {
 
+    private InventaryManager inventaryManager;
+    public GameObject inventaryObject;
+
     private Vector3 startPosition;
     private NavMeshAgent agent;
     private GameObject player;
@@ -14,6 +17,8 @@ public class Letter : MonoBehaviour {
 
 
     void Start() {
+        inventaryManager = inventaryObject.GetComponent<InventaryManager>();
+
         startPosition = transform.position;
         player = Support.sharedObjects.player;
         agent = GetComponent<NavMeshAgent>();
@@ -29,7 +34,17 @@ public class Letter : MonoBehaviour {
     }
 
     void OnTriggerEnter(Collider other) {
-        if ( other.gameObject == player ) {
+         if ( other.gameObject == player ) {
+            if (!following)
+            {
+                if (agent.name.Contains("(Clone)"))
+                {
+                    bool win = inventaryManager.AddLetter(agent.name[0]);
+                    Debug.Log(win);
+                }
+                Debug.Log(other.gameObject.name);
+                //inventaryManager.AddLetter()
+            }
             StartFollowing();
         }
     }
