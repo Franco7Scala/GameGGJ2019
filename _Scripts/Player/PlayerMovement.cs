@@ -61,6 +61,7 @@ public class PlayerMovement : MonoBehaviour {
             }
             else if ( Input.GetKeyUp(KeyCode.LeftShift) ) {
                 running = false;
+                health.IncreaseFitness();
             }
             // Running
             if ( running && health.FitnessAvailable() ) {
@@ -103,7 +104,6 @@ public class PlayerMovement : MonoBehaviour {
                 animator.SetBool("Run", false);
                 animator.SetBool("Idle", false);
                 speed = walkSpeed;
-                health.IncreaseFitness();
             }
             Vector3 movement = new Vector3(h * speed, 0, v * speed);
             movement = Vector3.ClampMagnitude(movement, speed);
