@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class Patrol : MonoBehaviour {
     public Transform[] points;
     public GameObject colliderObject;
+    public AudioClip clip;
 
     private int destinationPoint = 0;
     private bool killed = false;
@@ -62,6 +63,7 @@ public class Patrol : MonoBehaviour {
         if (other.gameObject == Support.sharedObjects.player)
         {
             Support.sharedObjects.inventary.GetComponent<InventaryManager>().ClearLetters();
+            Support.sharedObjects.controller.GetComponent<AudioSource>().PlayOneShot(clip);
 
             playerHealth.EnemyAttack(10);
             GotoNextPoint();
