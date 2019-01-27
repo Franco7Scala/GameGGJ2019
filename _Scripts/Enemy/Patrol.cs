@@ -59,9 +59,14 @@ public class Patrol : MonoBehaviour {
     }
 
     public void OnTriggerEnter(Collider other) {
-        playerHealth.EnemyAttack(10);
-        GotoNextPoint();
-        Thread.Sleep(5);
+        if (other.gameObject == Support.sharedObjects.player)
+        {
+            Support.sharedObjects.inventary.GetComponent<InventaryManager>().ClearLetters();
+
+            playerHealth.EnemyAttack(10);
+            GotoNextPoint();
+            Thread.Sleep(5);
+        }
     }
 
 

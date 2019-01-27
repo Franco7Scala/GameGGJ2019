@@ -9,18 +9,25 @@ public class LevelManager : MonoBehaviour
     public GameObject house;
 
     private GameObject[] spawnPoints;
+    private GameObject[] enemyObject;
     private SpawnManager spawnManager;
     private MainLightManager lightManager;
     private List<string> words;
+    private List<int> enemy;
 
     void Start()
     {
         words = new List<string>();
-        words.Add("t");
-        words.Add("testsdsd");
-        words.Add("test3");
-        words.Add("test4");
-        words.Add("test5");
+        words.Add("Belong"); 
+        words.Add("Support");
+        words.Add("Serenity");
+        words.Add("familiarity");
+
+        enemy = new List<int>();
+        enemy.Add(3);
+        enemy.Add(6);
+        enemy.Add(9);
+        enemy.Add(12);
 
         int level = PlayerPrefs.GetInt("level", 1);
 
@@ -28,6 +35,31 @@ public class LevelManager : MonoBehaviour
         lightManager.IntensityUp(((float)level) / ((float)words.Count));
 
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPointsPlayer");
+        enemyObject = GameObject.FindGameObjectsWithTag("Enemy");
+
+        if (enemyObject.Length > 0)
+        {
+            foreach(GameObject go in enemyObject)
+            {
+                go.SetActive(false);
+            }
+            int enemyToShow = enemy[level - 1];
+            List<int> indexUsed = new List<int>();
+            while (true)
+            {
+                int randomIndex = Mathf.RoundToInt(Random.Range(0, enemyObject.Length));
+                if (!indexUsed.Contains(randomIndex))
+                {
+                    indexUsed.Add(randomIndex);
+                    enemyObject[randomIndex].SetActive(true);
+                }
+
+                if (indexUsed.Count == enemyToShow)
+                {
+                    break;
+                }
+            }
+        }
 
         spawnManager = manager.GetComponent<SpawnManager>();
         spawnManager.InitScene(spawnPoints, words[level-1]);

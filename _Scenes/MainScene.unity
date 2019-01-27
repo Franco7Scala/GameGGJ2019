@@ -16545,6 +16545,11 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 5821003703401457137, guid: 0b8c739654f3445d196ddb801bf0fb92,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5821003703401457139, guid: 0b8c739654f3445d196ddb801bf0fb92,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -33171,6 +33176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 1824686080}
   controller: {fileID: 1242134360}
+  inventary: {fileID: 81219978}
   thresholdDistancePlayer: 10
   thresholdDamagePlayer: 1
 --- !u!114 &1242134364
@@ -33217,6 +33223,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   manager: {fileID: 788293472}
+  house: {fileID: 0}
 --- !u!4 &1242541699 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1732412826, guid: 2b92c9e1b0efd44398623caf0d521e1b,
@@ -33551,6 +33558,16 @@ PrefabInstance:
       propertyPath: clip
       value: 
       objectReference: {fileID: 8300000, guid: 0a630e58a4a794458be1bcc7d5040ba9, type: 3}
+    - target: {fileID: 1861758563652888326, guid: 0f380c5ebf25042f68f98d201a621788,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 1861758563652888326, guid: 0f380c5ebf25042f68f98d201a621788,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 50
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0f380c5ebf25042f68f98d201a621788, type: 3}
 --- !u!4 &1252730794 stripped

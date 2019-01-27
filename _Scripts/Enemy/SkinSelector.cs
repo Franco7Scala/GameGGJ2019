@@ -4,10 +4,8 @@
 public class SkinSelector : MonoBehaviour {
     public GameObject[] skins;
 
-        
     void Start() {
-        skins[Random.Range(0, skins.Length - 1)].SetActive(true);
+        int randomIndex = Mathf.RoundToInt(Random.Range(0, skins.Length));
+        skins[randomIndex].SetActive(true);
     }
-
-
 }
