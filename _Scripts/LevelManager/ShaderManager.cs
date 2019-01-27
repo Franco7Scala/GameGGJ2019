@@ -22,7 +22,7 @@ public class ShaderManager : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit))
         {
-            if(hit.collider.CompareTag("Building") || hit.collider.CompareTag("Untagged"))
+            if(hit.collider.CompareTag("Building"))
             {
                 if(prevCollided != null)
                 {
@@ -32,7 +32,7 @@ public class ShaderManager : MonoBehaviour
                 prevMaterial = prevCollided.GetComponent<Renderer>().material;
 
                 hit.collider.GetComponent<Renderer>().material = transparentMat;
-            } else if(hit.collider.CompareTag("Player") && prevCollided != null)
+            } else if((hit.collider.CompareTag("Player") || hit.collider.CompareTag("Untagged")) && prevCollided != null)
             {
                 prevCollided.GetComponent<Renderer>().material = prevMaterial;
             }
