@@ -4,8 +4,14 @@ using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 [RequireComponent(typeof(PlayerHealth))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovement : MonoBehaviour {
-    public Animator animator;
+    public GameObject[] skins;
+    public AudioSource singleAudioSource;
+    public AudioClip walkClip;
+    public AudioClip walkOnWaterClip;
+    public AudioClip runClip;
+    public AudioClip jumpClip;
     public float turnSpeed = 50f;
     public float walkSpeed = 6.0f;
     public float runSpeed = 13.0f;
@@ -16,18 +22,25 @@ public class PlayerMovement : MonoBehaviour {
 
     private CharacterController controller;
     private PlayerHealth health;
+    private AudioSource audioSource;
     private ControllerColliderHit contact;
+    private Animator animator;
     private int jumpSteps = Int32.MaxValue;
     private float speed = 0;
     private bool running = false;
     private bool jumping = false;
+    private bool onWater = false;
     private float verticalSpeed = 0;
 
 
     void Start() {
         controller = GetComponent<CharacterController>();
         health = GetComponent<PlayerHealth>();
+        audioSource = GetComponent<AudioSource>();
         speed = walkSpeed;
+        int skin = PlayerPrefs.GetInt("skin", 0);
+        skins[0].SetActive(true);
+        animator = skins[0].GetComponent<Animator>();
     }
 
     void Update() {
@@ -38,6 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         if ( Input.GetKeyDown(KeyCode.Space) && !jumping ) {
             jumping = true;
             verticalSpeed = jumpSpeed;
+            singleAudioSource.PlayOneShot(jumpClip, 1.0f);
             animator.SetTrigger("Jump");
         }
         if ( Input.GetKeyDown(KeyCode.LeftShift) ) {
@@ -50,16 +64,40 @@ public class PlayerMovement : MonoBehaviour {
         // Running
         if ( running && health.FitnessAvailable() ) {
             speed = runSpeed;
+            if ( audioSource.clip != runClip ) {
+                audioSource.clip = runClip;
+            }
+            if ( !audioSource.isPlaying ) {
+                audioSource.Play();
+            }
             animator.SetBool("Walk", false);
             animator.SetBool("Run", true);
             animator.SetBool("Idle", false);
         }
         else if ( h == 0.0f && v == 0.0f ) {
+            audioSource.Pause();
             animator.SetBool("Walk", false);
             animator.SetBool("Run", false);
             animator.SetBool("Idle", true);
         }
         else {
+            if ( onWater ) {
+                if ( audioSource.clip != walkOnWaterClip ) {
+                    audioSource.clip = walkOnWaterClip;
+                }
+                if ( !audioSource.isPlaying ) {
+                    audioSource.Play();
+                }
+            }
+            else {
+                if ( audioSource.clip != walkClip ) {
+                    audioSource.clip = walkClip;
+                }
+                if ( !audioSource.isPlaying ) {
+                    audioSource.Play();
+                }
+
+            }
             animator.SetBool("Walk", true);
             animator.SetBool("Run", false);
             animator.SetBool("Idle", false);
@@ -101,6 +139,10 @@ public class PlayerMovement : MonoBehaviour {
             return (hit.distance <= check);
         }
         return false;
+    }
+
+    public void SetOnWater(bool status) {
+        onWater = status;
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit) {
