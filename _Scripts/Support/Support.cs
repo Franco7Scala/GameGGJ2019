@@ -4,7 +4,7 @@
 public class Support : MonoBehaviour {
     public static Support sharedObjects;
     public GameObject player;
-    public float thresholdDistancePlayer = 10.0f;
+    public float thresholdDistancePlayer = 15.0f;
     public float thresholdDamagePlayer = 1.0f;
 
 
