@@ -14,7 +14,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         words = new List<string>();
-        words.Add("test");
+        words.Add("t");
         words.Add("test2");
         words.Add("test3");
         words.Add("test4");

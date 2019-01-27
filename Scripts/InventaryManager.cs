@@ -10,14 +10,31 @@ public class InventaryManager : MonoBehaviour
     private bool[] found;
     private Text[] textareas;
     private GameObject[] listLetterObject;
+    private List<Letter> listLetterCollected;
 
     public GameObject[] alphabet;
 
     public GameObject gridLayout;
     public GameObject letterUi;
 
+    private int indexLetter = 0;
+
+    public int IndexLetter
+    {
+        get
+        {
+            return indexLetter;
+        }
+        set
+        {
+            indexLetter = value;
+        }
+    }
+
     public void Init(string word, GameObject[] spawnPoints, Vector3 playerPosition)
     {
+        listLetterCollected = new List<Letter>();
+
         letters = word.ToUpper().ToCharArray();
         found = new bool[letters.Length];
         textareas = new Text[letters.Length];
@@ -75,9 +92,29 @@ public class InventaryManager : MonoBehaviour
         }
     }
 
-
-    public bool AddLetter(char letter)
+    public Letter GetGameObjectBefore(Letter letter)
     {
+        for (int i=0; i<listLetterCollected.Count; i++)
+        {
+            if(listLetterCollected[i].id == letter.id)
+            {
+                if (i == 0)
+                {
+                    return null;
+                }
+                else
+                {
+                    return listLetterCollected[i - 1];
+                }
+            }
+        }
+        return null;
+    }
+
+    public bool AddLetter(char letter, Letter letterCoolected)
+    {
+        listLetterCollected.Add(letterCoolected);
+
         for (int i = 0; i < letters.Length; i++)
         {
             if (letters[i] == letter && !found[i])
@@ -98,6 +135,7 @@ public class InventaryManager : MonoBehaviour
         {
             found[i] = false;
             textareas[i].color = new Color(0.8773585f, 0.864943f, 0.864943f, 1f);
+            listLetterCollected.Clear();
         }
     }
 
