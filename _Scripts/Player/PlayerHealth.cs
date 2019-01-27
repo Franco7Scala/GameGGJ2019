@@ -34,7 +34,7 @@ public class PlayerHealth : MonoBehaviour {
                 increasingFitness = false;
             }
         }
-        if (decreasingFitness)
+        else if (decreasingFitness)
         {
             fitness -= Time.deltaTime / decreaseFitnessRate;
             if (fitness <= 0)
