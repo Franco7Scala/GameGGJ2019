@@ -7,6 +7,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(Rigidbody))]
 public class Patrol : MonoBehaviour {
     public Transform[] points;
+    public GameObject colliderObject;
 
     private int destinationPoint = 0;
     private bool killed = false;
@@ -47,6 +48,7 @@ public class Patrol : MonoBehaviour {
         foreach ( Collider c in GetComponents<Collider>() ) {
             c.isTrigger = true;
         }
+        Destroy(colliderObject);
         killed = true;
         agent.enabled = false;
         body.isKinematic = false;

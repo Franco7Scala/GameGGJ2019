@@ -18,11 +18,13 @@ public class PlayerHealth : MonoBehaviour {
         }
 
         health -= quantity;
-        if(health <= 0)
-        {
-            GetComponent<Animator>().SetBool("Damage", true);
-            GetComponent<Animator>().SetBool("Die", true);
+        if(health <= 0) {
+            GetComponent<PlayerMovement>().Die();
         }
+        else {
+            GetComponent<PlayerMovement>().Damage();
+        }
+
     }
 
     public void IncreaseFitness() {

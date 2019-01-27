@@ -30,6 +30,7 @@ public class PlayerMovement : MonoBehaviour {
     private bool running = false;
     private bool jumping = false;
     private bool onWater = false;
+    private bool died = false;
     private float verticalSpeed = 0;
 
 
@@ -44,92 +45,94 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void Update() {
-        // Movement
-        float h = -Input.GetAxis("Horizontal");
-        float v = -Input.GetAxis("Vertical");
-        // Jump
-        if ( Input.GetKeyDown(KeyCode.Space) && !jumping ) {
-            jumping = true;
-            verticalSpeed = jumpSpeed;
-            singleAudioSource.PlayOneShot(jumpClip, 1.0f);
-            animator.SetTrigger("Jump");
-        }
-        if ( Input.GetKeyDown(KeyCode.LeftShift) ) {
-            running = true;
-            health.DecreaseFitness();
-        }
-        else if ( Input.GetKeyUp(KeyCode.LeftShift) ) {
-            running = false;
-        }
-        // Running
-        if ( running && health.FitnessAvailable() ) {
-            speed = runSpeed;
-            if ( audioSource.clip != runClip ) {
-                audioSource.clip = runClip;
+        if ( !died ) {
+            // Movement
+            float h = -Input.GetAxis("Horizontal");
+            float v = -Input.GetAxis("Vertical");
+            // Jump
+            if ( Input.GetKeyDown(KeyCode.Space) && !jumping ) {
+                jumping = true;
+                verticalSpeed = jumpSpeed;
+                singleAudioSource.PlayOneShot(jumpClip, 1.0f);
+                animator.SetTrigger("Jump");
             }
-            if ( !audioSource.isPlaying ) {
-                audioSource.Play();
+            if ( Input.GetKeyDown(KeyCode.LeftShift) ) {
+                running = true;
+                health.DecreaseFitness();
             }
-            animator.SetBool("Walk", false);
-            animator.SetBool("Run", true);
-            animator.SetBool("Idle", false);
-        }
-        else if ( h == 0.0f && v == 0.0f ) {
-            audioSource.Pause();
-            animator.SetBool("Walk", false);
-            animator.SetBool("Run", false);
-            animator.SetBool("Idle", true);
-        }
-        else {
-            if ( onWater ) {
-                if ( audioSource.clip != walkOnWaterClip ) {
-                    audioSource.clip = walkOnWaterClip;
+            else if ( Input.GetKeyUp(KeyCode.LeftShift) ) {
+                running = false;
+            }
+            // Running
+            if ( running && health.FitnessAvailable() ) {
+                speed = runSpeed;
+                if ( audioSource.clip != runClip ) {
+                    audioSource.clip = runClip;
                 }
                 if ( !audioSource.isPlaying ) {
                     audioSource.Play();
                 }
+                animator.SetBool("Walk", false);
+                animator.SetBool("Run", true);
+                animator.SetBool("Idle", false);
+            }
+            else if ( h == 0.0f && v == 0.0f ) {
+                audioSource.Pause();
+                animator.SetBool("Walk", false);
+                animator.SetBool("Run", false);
+                animator.SetBool("Idle", true);
             }
             else {
-                if ( audioSource.clip != walkClip ) {
-                    audioSource.clip = walkClip;
-                }
-                if ( !audioSource.isPlaying ) {
-                    audioSource.Play();
-                }
-
-            }
-            animator.SetBool("Walk", true);
-            animator.SetBool("Run", false);
-            animator.SetBool("Idle", false);
-            speed = walkSpeed;
-            health.IncreaseFitness();
-        }
-        Vector3 movement = new Vector3(h * speed, 0, v * speed);
-        movement = Vector3.ClampMagnitude(movement, speed);
-        // Jump
-        if ( IsRayGrounded() ) {
-            jumping = false;
-            verticalSpeed = minimumFall;
-        }
-        else {
-            verticalSpeed += gravity * 5 * Time.deltaTime;
-            if ( verticalSpeed < terminalVelocity ) {
-                verticalSpeed = terminalVelocity;
-            }
-            if ( controller.isGrounded ) {
-                if ( Vector3.Dot(movement, contact.normal) < 0 ) {
-                    movement -= contact.normal * speed;
+                if ( onWater ) {
+                    if ( audioSource.clip != walkOnWaterClip ) {
+                        audioSource.clip = walkOnWaterClip;
+                    }
+                    if ( !audioSource.isPlaying ) {
+                        audioSource.Play();
+                    }
                 }
                 else {
-                    movement += contact.normal * speed;
+                    if ( audioSource.clip != walkClip ) {
+                        audioSource.clip = walkClip;
+                    }
+                    if ( !audioSource.isPlaying ) {
+                        audioSource.Play();
+                    }
+
+                }
+                animator.SetBool("Walk", true);
+                animator.SetBool("Run", false);
+                animator.SetBool("Idle", false);
+                speed = walkSpeed;
+                health.IncreaseFitness();
+            }
+            Vector3 movement = new Vector3(h * speed, 0, v * speed);
+            movement = Vector3.ClampMagnitude(movement, speed);
+            // Jump
+            if ( IsRayGrounded() ) {
+                jumping = false;
+                verticalSpeed = minimumFall;
+            }
+            else {
+                verticalSpeed += gravity * 5 * Time.deltaTime;
+                if ( verticalSpeed < terminalVelocity ) {
+                    verticalSpeed = terminalVelocity;
+                }
+                if ( controller.isGrounded ) {
+                    if ( Vector3.Dot(movement, contact.normal) < 0 ) {
+                        movement -= contact.normal * speed;
+                    }
+                    else {
+                        movement += contact.normal * speed;
+                    }
                 }
             }
+            movement.y = verticalSpeed;
+            // Finalizing
+            movement *= Time.deltaTime;
+            movement = transform.TransformDirection(movement);
+            controller.Move(movement);
         }
-        movement.y = verticalSpeed;
-        // Finalizing
-        movement *= Time.deltaTime;
-        movement = transform.TransformDirection(movement);
-        controller.Move(movement);
     }
 
     private bool IsRayGrounded() {
@@ -143,6 +146,15 @@ public class PlayerMovement : MonoBehaviour {
 
     public void SetOnWater(bool status) {
         onWater = status;
+    }
+
+    public void Die() {
+        died = true;
+        animator.SetTrigger("Die");
+    }
+
+    public void Damage() {
+        animator.SetTrigger("Damage");
     }
 
     void OnControllerColliderHit(ControllerColliderHit hit) {
