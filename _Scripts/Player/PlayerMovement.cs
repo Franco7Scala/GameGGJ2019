@@ -25,7 +25,6 @@ public class PlayerMovement : MonoBehaviour {
     private AudioSource audioSource;
     private ControllerColliderHit contact;
     private Animator animator;
-    private int jumpSteps = Int32.MaxValue;
     private float speed = 0;
     private bool running = false;
     private bool jumping = false;

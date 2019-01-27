@@ -6,15 +6,11 @@ public class PlayerHealth : MonoBehaviour {
     public float health = 100f;
     public float fitness = 10f;
     public float maxFitness = 10f;
-
     public float decreaseFitnessRate = 1.0f;
     public float increaseFitnessRate = 2.0f;
-
     private bool increasingFitness = false;
     private bool decreasingFitness = false;
 
-    private IEnumerator increaseRoutine;
-    private IEnumerator decreaseRoutine;
 
     private void Update()
     {
