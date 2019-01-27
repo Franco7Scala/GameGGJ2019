@@ -46,7 +46,7 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     public void EnemyAttack(float quantity) {
-        if( health <= 0) {
+        if( health <= 0 || FOREVER) {
             return;
         }
 

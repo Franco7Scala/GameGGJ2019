@@ -13,7 +13,7 @@ public class InventaryManager : MonoBehaviour
     private List<Letter> listLetterCollected;
 
     private LevelManager levelManager;
-
+    public AudioClip clip;
     public GameObject[] alphabet;
 
     public GameObject gridLayout;
@@ -118,6 +118,7 @@ public class InventaryManager : MonoBehaviour
     public bool AddLetter(char letter, Letter letterCoolected)
     {
         listLetterCollected.Add(letterCoolected);
+        levelManager.gameObject.GetComponent<AudioSource>().PlayOneShot(clip);
 
         for (int i = 0; i < letters.Length; i++)
         {
