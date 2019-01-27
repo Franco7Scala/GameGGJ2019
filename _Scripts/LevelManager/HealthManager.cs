@@ -24,7 +24,7 @@ public class HealthManager : MonoBehaviour
         healthBar.fillAmount -= (healthDamage * Time.deltaTime);
         healthBar.color = Color.Lerp(Color.red, Color.green, healthBar.fillAmount);
 
-        fitnessBar.fillAmount = Support.sharedObjects.player.GetComponent<PlayerHealth>().fitness / 100f;
+        fitnessBar.fillAmount = Support.sharedObjects.player.GetComponent<PlayerHealth>().fitness / Support.sharedObjects.player.GetComponent<PlayerHealth>().maxFitness;
 
         Support.sharedObjects.player.GetComponent<PlayerHealth>().health = healthBar.fillAmount * 100;
     }

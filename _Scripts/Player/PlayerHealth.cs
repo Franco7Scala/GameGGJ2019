@@ -4,13 +4,44 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour {
     public float health = 100f;
-    public float fitness = 100f;
+    public float fitness = 10f;
+    public float maxFitness = 10f;
 
-    public float secToIncrease = 0.1f;
-    public float secToDecrease = 0.2f;
+    public float decreaseFitnessRate = 1.0f;
+    public float increaseFitnessRate = 2.0f;
 
-    private bool continueIncrease = false;
-    private bool continueDecrease = false;
+    private bool increasingFitness = false;
+    private bool decreasingFitness = false;
+
+    private IEnumerator increaseRoutine;
+    private IEnumerator decreaseRoutine;
+
+    private void Update()
+    {
+        if(health <= 0)
+        {
+            GetComponent<PlayerMovement>().Die();
+            return;
+        }
+        if (increasingFitness)
+        {
+            fitness += Time.deltaTime / increaseFitnessRate;
+            if (fitness >= maxFitness)
+            {
+                fitness = maxFitness;
+                increasingFitness = false;
+            }
+        }
+        if (decreasingFitness)
+        {
+            fitness -= Time.deltaTime / decreaseFitnessRate;
+            if (fitness <= 0)
+            {
+                fitness = 0;
+                decreasingFitness = false;
+            }
+        }
+    }
 
     public void EnemyAttack(float quantity) {
         if( health <= 0) {
@@ -28,50 +59,17 @@ public class PlayerHealth : MonoBehaviour {
     }
 
     public void IncreaseFitness() {
-        continueDecrease = false;
-        continueIncrease = true;
-
-        StopCoroutine(DecreaseCoroutine());
-        StartCoroutine(IncreaseCoroutine());
+        decreasingFitness = false;
+        increasingFitness = true;
     }
 
     public void DecreaseFitness() {
-        continueDecrease = false;
-        continueIncrease = true;
-
-        StopCoroutine(IncreaseCoroutine());
-        StartCoroutine(DecreaseCoroutine());
+        decreasingFitness = true;
+        increasingFitness = false;
     }
 
     public bool FitnessAvailable() {
-        return true;
+        return fitness > 0;
     }
 
-    IEnumerator IncreaseCoroutine()
-    {
-        while(continueIncrease)
-        {
-            fitness += secToIncrease * 100f;
-            if(fitness >= 100f)
-            {
-                fitness = 100f;
-                continueIncrease = false;
-            }
-            yield return new WaitForSeconds(secToIncrease);
-        }
-    }
-
-    IEnumerator DecreaseCoroutine()
-    {
-        while (continueDecrease)
-        {
-            fitness -= secToDecrease * 100f;
-            if (fitness <= 0f)
-            {
-                fitness = 0f;
-                continueDecrease = false;
-            }
-            yield return new WaitForSeconds(secToDecrease);
-        }
-    }
 }
