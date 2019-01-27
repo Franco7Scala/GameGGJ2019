@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour {
         audioSource = GetComponent<AudioSource>();
         speed = walkSpeed;
         int skin = PlayerPrefs.GetInt("skin", 0);
-        skins[0].SetActive(true);
+        skins[skin].SetActive(true);
         animator = skins[0].GetComponent<Animator>();
     }
 
