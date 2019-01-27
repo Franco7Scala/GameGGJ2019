@@ -150,6 +150,8 @@ public class PlayerMovement : MonoBehaviour {
     public void Die() {
         died = true;
         animator.SetTrigger("Die");
+
+        Support.sharedObjects.controller.GetComponent<LevelManager>().AfterWin();
     }
 
     public void Damage() {

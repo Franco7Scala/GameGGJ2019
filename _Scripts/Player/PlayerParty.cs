@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 
@@ -6,25 +7,19 @@ public class PlayerParty : MonoBehaviour {
     public GameObject fireworks;
 
 
-    public void AnimateCompletion() {
+    public void AnimateCompletion(Action callback) {
         if ( fireworks ) {
-            StartCoroutine(PlayFireworks());  
+            StartCoroutine(PlayFireworks(callback));  
         }
     }
 
-    private void Update() {
-        if (Input.GetKeyDown(KeyCode.T)) {
-            AnimateCompletion();
-        }
-
-    }
-
-    IEnumerator PlayFireworks() {
+    IEnumerator PlayFireworks(Action callback) {
         foreach ( ParticleSystem firework in fireworks.GetComponentsInChildren<ParticleSystem>() ) {
             firework.Play();
             firework.GetComponent<AudioSource>().Play();
-            yield return new WaitForSeconds(Random.Range(0.2f, 0.7f));
+            yield return new WaitForSeconds(UnityEngine.Random.Range(0.2f, 0.7f));
         }
+        callback();
         yield return null;
     }
 
