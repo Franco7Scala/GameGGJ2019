@@ -8,6 +8,13 @@ public class HealthManager : MonoBehaviour
     public Image healthBar;
     public Image fitnessBar;
     public float healthDamage = 0.1f;
+    public float healthRegenerationStep = 0.1f;
+
+    public void IncreaseHealthLetterCollected()
+    {
+        healthBar.fillAmount += healthRegenerationStep;
+        Support.sharedObjects.player.GetComponent<PlayerHealth>().health = healthBar.fillAmount * 100;
+    }
 
     private void decreaseBar(float damage)
     {

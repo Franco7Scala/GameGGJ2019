@@ -30,6 +30,7 @@ public class Letter : MonoBehaviour {
 
     void OnTriggerEnter(Collider other) {
         if ( other.gameObject == player ) {
+            //TODO: CALL HealthManager to Increase Health and HealthBar
             StartFollowing();
         }
     }
