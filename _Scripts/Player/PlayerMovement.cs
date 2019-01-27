@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
         speed = walkSpeed;
         int skin = PlayerPrefs.GetInt("skin", 0);
         skins[skin].SetActive(true);
-        animator = skins[0].GetComponent<Animator>();
+        animator = skins[skin].GetComponent<Animator>();
     }
 
     void Update() {
