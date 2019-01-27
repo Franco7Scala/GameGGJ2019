@@ -19,16 +19,16 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         words = new List<string>();
-        words.Add("B");
-        //words.Add("Support");
-        //words.Add("Serenity");
-        //words.Add("familiarity");
+        words.Add("Belong");
+        words.Add("Support");
+        words.Add("Serenity");
+        words.Add("familiarity");
 
         enemy = new List<int>();
         enemy.Add(3);
-        //enemy.Add(6);
-        //enemy.Add(9);
-        //enemy.Add(12);
+        enemy.Add(6);
+        enemy.Add(9);
+        enemy.Add(12);
 
         int level = PlayerPrefs.GetInt("level", 1);
 
