@@ -33,6 +33,19 @@ public class LevelManager : MonoBehaviour
         spawnManager.InitScene(spawnPoints, words[level-1]);
     }
 
+
+    private void Update() {
+         if ( Input.GetKeyDown(KeyCode.O) ) {
+            house.SetActive(true);
+            house.GetComponent<Rigidbody>().isKinematic = false;
+            Vector3 pos = Support.sharedObjects.player.transform.position;
+            pos.y += 7;
+            pos.z -= 4;
+            pos.x -= 4;
+            house.transform.position = pos;
+            Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
+        }
+    }
     public void Win()
     {
         int level = PlayerPrefs.GetInt("level", 1);
@@ -47,8 +60,11 @@ public class LevelManager : MonoBehaviour
         else
         {
             house.SetActive(true);
+            house.GetComponent<Rigidbody>().isKinematic = false;
             Vector3 pos = Support.sharedObjects.player.transform.position;
             pos.y += 7;
+            pos.z -= 4;
+            pos.x -= 4;
             house.transform.position = pos;
             Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
         }
