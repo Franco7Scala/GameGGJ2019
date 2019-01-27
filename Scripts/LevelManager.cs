@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     {
         words = new List<string>();
         words.Add("t");
-        words.Add("test2");
+        words.Add("testsdfhjsdfhsjdgfshdjgfhgsdfsdgfhhsdfgsfgsdhjfghjsd");
         words.Add("test3");
         words.Add("test4");
         words.Add("test5");
