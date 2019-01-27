@@ -11,9 +11,15 @@ public class PlayerHealth : MonoBehaviour {
     private bool increasingFitness = false;
     private bool decreasingFitness = false;
 
+    public bool FOREVER = false;
 
     private void Update()
     {
+        if(FOREVER)
+        {
+            return;
+        }
+
         if(health <= 0)
         {
             GetComponent<PlayerMovement>().Die();

@@ -40,8 +40,11 @@ public class Patrol : MonoBehaviour {
     }
 
     void GotoNextPoint() {
-        agent.destination = points[destinationPoint].position;
-        destinationPoint = (destinationPoint + 1) % points.Length;
+        if (agent.enabled)
+        {
+            agent.destination = points[destinationPoint].position;
+            destinationPoint = (destinationPoint + 1) % points.Length;
+        }
     }
 
     public void Kill() {
