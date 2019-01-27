@@ -16,7 +16,7 @@ public class HealthManager : MonoBehaviour
 
     private void Update()
     {
-        if (healthBar.fillAmount <= 0)
+        if (healthBar.fillAmount <= 0 || Support.sharedObjects.player.GetComponent<PlayerHealth>().FOREVER)
         {
             return;
         }
