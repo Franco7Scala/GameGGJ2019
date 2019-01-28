@@ -69,7 +69,6 @@ public class InventaryManager : MonoBehaviour
                 {
                     Vector3 nearPosition = playerPosition + new Vector3(5, 0, 0);
                     listLetterObject[i].transform.position = nearPosition;
-                    listLetterObject[i].transform.Rotate(new Vector3(90, 0, 0), Space.World);
                     listLetterObject[i].SetActive(true);
                     break;
                 }
@@ -83,7 +82,6 @@ public class InventaryManager : MonoBehaviour
                         try
                         {
                             listLetterObject[i].transform.position = spawnPoints[randomIndex].transform.position;
-                            listLetterObject[i].transform.Rotate(new Vector3(90, 0, 0), Space.World);
                             listLetterObject[i].SetActive(true);
                         }catch(System.Exception _)
                         {}

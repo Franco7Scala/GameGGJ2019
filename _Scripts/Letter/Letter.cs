@@ -42,7 +42,14 @@ public class Letter : MonoBehaviour
         else
         {
             transform.GetChild(1).transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
-            Debug.Log("");
+
+            if (!agent.pathPending)
+            {
+                if (agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    agent.enabled = false;
+                }
+            }
         }
     }
 
@@ -61,7 +68,6 @@ public class Letter : MonoBehaviour
                     Debug.Log(win);
                 }
                 Debug.Log(other.gameObject.name);
-                //inventaryManager.AddLetter()
             }
             StartFollowing();
         }
@@ -90,10 +96,8 @@ public class Letter : MonoBehaviour
             destination -= player.GetComponent<Transform>().forward;
         }
 
-
         agent.destination = destination;
-        agent.transform.Rotate(new Vector3(90, 0, 0), Space.Self);
-        transform.GetChild(1).transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
+        //transform.GetChild(1).transform.Rotate(Vector3.up, rotationSpeed * Time.deltaTime, Space.World);
     }
 
     public void Return()
@@ -102,7 +106,6 @@ public class Letter : MonoBehaviour
         following = false;
         agent.enabled = true;
         agent.destination = startPosition;
-        agent.transform.Rotate(new Vector3(90, 0, 0), Space.Self);
         transform.GetChild(0).GetComponent<ParticleSystem>().Play();
     }
 

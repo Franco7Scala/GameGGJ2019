@@ -7,7 +7,6 @@ public class LevelManager : MonoBehaviour
 {
     public GameObject manager;
     public GameObject house;
-    public GameObject end;
 
     private GameObject[] spawnPoints;
     private GameObject[] enemyObject;
@@ -19,21 +18,21 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         words = new List<string>();
-        words.Add("B");
-        //words.Add("Support");
-        //words.Add("Serenity");
-        //words.Add("familiarity");
+        words.Add("Belong"); 
+        words.Add("Support");
+        words.Add("Serenity");
+        words.Add("familiarity");
 
         enemy = new List<int>();
         enemy.Add(3);
-        //enemy.Add(6);
-        //enemy.Add(9);
-        //enemy.Add(12);
+        enemy.Add(6);
+        enemy.Add(9);
+        enemy.Add(12);
 
         int level = PlayerPrefs.GetInt("level", 1);
 
         lightManager = manager.GetComponent<MainLightManager>();
-        lightManager.IntensityUp((((float)level) / ((float)words.Count)) * 0.5f);
+        lightManager.IntensityUp((((float)level) / ((float)words.Count))*0.5f);
 
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnPointsPlayer");
         enemyObject = GameObject.FindGameObjectsWithTag("Enemy");
@@ -66,19 +65,6 @@ public class LevelManager : MonoBehaviour
         spawnManager.InitScene(spawnPoints, words[level-1]);
     }
 
-
-    //private void Update() {
-    //     if ( Input.GetKeyDown(KeyCode.O) ) {
-    //        house.SetActive(true);
-    //        house.GetComponent<Rigidbody>().isKinematic = false;
-    //        Vector3 pos = Support.sharedObjects.player.transform.position;
-    //        pos.y += 10;
-    //        pos.z -= 4;
-    //        pos.x -= 4;
-    //        house.transform.position = pos;
-    //        Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
-    //    }
-    //}
     public void Win()
     {
         int level = PlayerPrefs.GetInt("level", 1);
@@ -92,19 +78,11 @@ public class LevelManager : MonoBehaviour
         }
         else
         {
-
-            end.SetActive(true);
-
             house.SetActive(true);
-            house.GetComponent<Rigidbody>().isKinematic = false;
             Vector3 pos = Support.sharedObjects.player.transform.position;
-            pos.y += 10;
-            pos.z -= 4;
-            pos.x -= 4;
+            pos.y += 7;
             house.transform.position = pos;
             Support.sharedObjects.player.GetComponent<PlayerParty>().AnimateCompletion(AfterEnd);
-
-            PlayerPrefs.DeleteAll();
         }
     }
 

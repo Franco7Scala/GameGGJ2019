@@ -13,7 +13,7 @@ public class PlayerFollow : MonoBehaviour
 
     public bool LookAtPlayer = false;
 
-    public bool RotateAroundPlayer = true;
+    public bool RotateAroundPlayer = false;
 
     public bool RotateMiddleMouseButton = true;
 
