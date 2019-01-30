@@ -67,7 +67,9 @@ public class Patrol : MonoBehaviour {
 
             playerHealth.EnemyAttack(10);
             GotoNextPoint();
+#if UNITY_STANDALONE
             Thread.Sleep(5);
+#endif
         }
     }
 

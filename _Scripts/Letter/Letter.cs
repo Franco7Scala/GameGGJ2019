@@ -36,7 +36,9 @@ public class Letter : MonoBehaviour
     {
         if (following)
         {
+#if UNITY_STANDALONE
             Thread.Sleep(3);
+#endif
             Follow();
         }
         else
